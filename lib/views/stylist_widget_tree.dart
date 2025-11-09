@@ -1,7 +1,7 @@
 import 'package:salon/data/notifiers.dart';
 import 'package:salon/views/components/stylist/service_page.dart';
+import 'package:salon/views/pages/stylist/dashboard/stylist_schedule_widget.dart';
 import 'package:salon/views/pages/stylist/profile_screen.dart';
-import 'package:salon/views/pages/stylist/stylist_dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:salon/views/pages/stylist/notification_screen.dart';
 import 'package:salon/theme/app_colors.dart';
