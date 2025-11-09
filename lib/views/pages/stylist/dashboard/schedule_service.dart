@@ -117,7 +117,7 @@ class ScheduleService {
         Uri.parse("$baseUrl/bookings/stylist/$stylistId?date=$dateString"),
         headers: {'Authorization': 'Bearer $token'},
       );
-
+      print(response.statusCode);
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
         List<dynamic> bookingsData = [];
@@ -126,6 +126,7 @@ class ScheduleService {
           if (responseData['success'] == true &&
               responseData['bookings'] != null) {
             bookingsData = responseData['bookings'] as List;
+            print("booking data: $bookingsData");
           }
         } else if (responseData is List) {
           bookingsData = responseData;

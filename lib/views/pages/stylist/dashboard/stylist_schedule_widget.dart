@@ -176,7 +176,7 @@ class _StylistScheduleWidgetState extends State<StylistScheduleWidget> {
               child: const Icon(Icons.info_outline, color: Colors.teal),
             ),
             const SizedBox(width: 12),
-            const Text('Захиалгын мэдээлэл'),
+            const Text('Захиалгын мэдээлэл', style: TextStyle(fontSize: 20.0)),
           ],
         ),
         content: SingleChildScrollView(
@@ -371,6 +371,7 @@ class _StylistScheduleWidgetState extends State<StylistScheduleWidget> {
     }
 
     for (var booking in todaysBookings) {
+      print("booking: $booking");
       if (booking.status == 'cancelled' || booking.status == 'no_show') {
         continue;
       }
