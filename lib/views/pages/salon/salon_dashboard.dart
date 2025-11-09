@@ -188,7 +188,7 @@ class _DashboardPageState extends State<SalonDashboard> {
                             children: [
                               // Day name (allow ellipsis on very narrow screens)
                               SizedBox(
-                                width: 60,
+                                width: 56,
                                 child: Text(
                                   dayNames[day] ??
                                       (day[0].toUpperCase() + day.substring(1)),
@@ -201,125 +201,132 @@ class _DashboardPageState extends State<SalonDashboard> {
                                 ),
                               ),
 
-                              // Status switch (constrained to avoid overflow)
-                              SizedBox(
-                                width: 48,
-                                child: Switch(
-                                  value: dayData['isOpen'] ?? false,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      workingHours[day]['isOpen'] = val;
-                                    });
-                                  },
-                                  activeColor: Colors.green,
-                                ),
+                              // Status switch (let it use intrinsic width to avoid overflow)
+                              Switch(
+                                value: dayData['isOpen'] ?? false,
+                                onChanged: (val) {
+                                  setState(() {
+                                    workingHours[day]['isOpen'] = val;
+                                  });
+                                },
+                                activeColor: Colors.green,
                               ),
 
                               const SizedBox(width: 8),
 
                               // Time buttons (only show if day is open)
                               if (dayData['isOpen'] ?? false) ...[
-                                Expanded(
-                                  child: Row(
-                                    children: [
-                                      // Open time
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () => pickTime(day, "open"),
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 12,
-                                              vertical: 8,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.blue[50],
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              border: Border.all(
-                                                color: Colors.blue[200]!,
-                                              ),
-                                            ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.access_time,
-                                                  size: 16,
-                                                  color: Colors.blue[600],
+                                Flexible(
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    alignment: Alignment.centerLeft,
+                                    child: Row(
+                                      children: [
+                                        // Open time
+                                        SizedBox(
+                                          width: 130,
+                                          child: GestureDetector(
+                                            onTap: () => pickTime(day, "open"),
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 8,
+                                                  ),
+                                              decoration: BoxDecoration(
+                                                color: Colors.blue[50],
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                border: Border.all(
+                                                  color: Colors.blue[200]!,
                                                 ),
-                                                const SizedBox(width: 4),
-                                                Text(
-                                                  dayData['open'] ?? '09:00',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.access_time,
+                                                    size: 16,
                                                     color: Colors.blue[600],
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 4,
-                                        ),
-                                        child: SizedBox(
-                                          width: 14,
-                                          child: Center(
-                                            child: Text(
-                                              '→',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.grey,
+                                                  const SizedBox(width: 4),
+                                                  Text(
+                                                    dayData['open'] ?? '09:00',
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.blue[600],
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
                                         ),
-                                      ),
 
-                                      // Close time
-                                      Expanded(
-                                        child: GestureDetector(
-                                          onTap: () => pickTime(day, "close"),
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                              horizontal: 12,
-                                              vertical: 8,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.orange[50],
-                                              borderRadius:
-                                                  BorderRadius.circular(6),
-                                              border: Border.all(
-                                                color: Colors.orange[200]!,
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 4,
+                                          ),
+                                          child: SizedBox(
+                                            width: 10,
+                                            child: Center(
+                                              child: Text(
+                                                '→',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.grey,
+                                                ),
                                               ),
                                             ),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              children: [
-                                                Icon(
-                                                  Icons.access_time,
-                                                  size: 16,
-                                                  color: Colors.orange[600],
+                                          ),
+                                        ),
+
+                                        // Close time
+                                        SizedBox(
+                                          width: 130,
+                                          child: GestureDetector(
+                                            onTap: () => pickTime(day, "close"),
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 8,
+                                                  ),
+                                              decoration: BoxDecoration(
+                                                color: Colors.orange[50],
+                                                borderRadius:
+                                                    BorderRadius.circular(6),
+                                                border: Border.all(
+                                                  color: Colors.orange[200]!,
                                                 ),
-                                                const SizedBox(width: 4),
-                                                Text(
-                                                  dayData['close'] ?? '18:00',
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w500,
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons.access_time,
+                                                    size: 16,
                                                     color: Colors.orange[600],
                                                   ),
-                                                ),
-                                              ],
+                                                  const SizedBox(width: 4),
+                                                  Text(
+                                                    dayData['close'] ?? '18:00',
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                      color: Colors.orange[600],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ] else ...[

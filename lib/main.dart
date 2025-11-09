@@ -88,7 +88,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       print("⏳ 2 минут өнгөрлөө, автомат logout хийж байна...");
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('token');
-
       if (!mounted) return;
 
       ScaffoldMessenger.of(context).showSnackBar(
